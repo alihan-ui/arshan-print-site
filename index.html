@@ -22,37 +22,40 @@ a{color:inherit}
 }
 
 .logo-wrap{text-decoration:none;display:flex;align-items:center;justify-content:center}
-.logo-box{width:180px;text-align:center;line-height:1}
+.logo-box{width:170px;text-align:center;line-height:1}
 
 .logo-mark{
-  width:88px;
-  height:58px;
-  margin:0 auto 4px;
+  width:92px;
+  height:70px;
+  margin:0 auto 2px;
   position:relative;
 }
 
-.logo-mark:before{
-  content:"";
+.logo-mark::before{
+  content:"A";
   position:absolute;
-  left:6px;
-  top:4px;
-  width:66px;
-  height:52px;
-  background:#111;
-  clip-path:polygon(36% 0, 0 100%, 16% 100%, 44% 22%, 88% 100%, 100% 100%, 55% 0);
+  left:0;
+  top:-18px;
+  font-family:Arial Black, Manrope, sans-serif;
+  font-size:96px;
+  font-weight:900;
+  line-height:1;
+  color:#111;
+  transform:skew(-8deg);
 }
 
-.logo-mark:after{
-  content:"";
+.logo-mark::after{
+  content:"A";
   position:absolute;
-  left:22px;
-  top:4px;
-  width:58px;
-  height:52px;
-  background:var(--red);
-  clip-path:polygon(36% 0, 0 100%, 16% 100%, 44% 22%, 88% 100%, 100% 100%, 55% 0);
+  left:20px;
+  top:-18px;
+  font-family:Arial Black, Manrope, sans-serif;
+  font-size:96px;
+  font-weight:900;
+  line-height:1;
+  color:var(--red);
+  transform:skew(-8deg);
 }
-
 .logo-name{font-weight:900;font-size:21px;letter-spacing:1px;color:#111}
 .logo-name span{color:var(--red)}
 .logo-sub{font-size:11px;letter-spacing:4px;margin-top:2px;color:#111}

@@ -601,19 +601,6 @@ document.getElementById("leadForm").addEventListener("submit", e => {
   });
 });
 
-document.getElementById("quickForm").addEventListener("submit", e => {
-  e.preventDefault();
-
-const msg =
-`Здравствуйте! Хочу оставить заявку в ARSHAN PRINT.
-
-👤 Имя: ${document.getElementById("qName").value.trim() || "—"}
-📞 Телефон: ${document.getElementById("qPhone").value.trim() || "—"}
-💬 Комментарий: ${document.getElementById("qComment").value.trim() || "—"}`;
-
-window.location.href = "https://api.whatsapp.com/send?phone=77019085358&text=" + encodeURIComponent(msg);
-});
-
 loadDataFromSheet();
 </script>
 </body>

@@ -613,13 +613,14 @@ document.getElementById("leadForm").addEventListener("submit", e => {
 document.getElementById("quickForm").addEventListener("submit", e => {
   e.preventDefault();
 
-  const msg =
-    "Здравствуйте! Хочу оставить заявку в ARSHAN PRINT.\\n\\n" +
-    "Имя: " + (document.getElementById("qName").value.trim() || "—") + "\\n" +
-    "Телефон: " + (document.getElementById("qPhone").value.trim() || "—") + "\\n" +
-    "Комментарий: " + (document.getElementById("qComment").value.trim() || "—");
+const msg =
+`Здравствуйте! Хочу оставить заявку в ARSHAN PRINT.
 
-  window.location.href = "https://api.whatsapp.com/send?phone=77019085358&text=" + encodeURIComponent(msg);
+👤 Имя: ${document.getElementById("qName").value.trim() || "—"}
+📞 Телефон: ${document.getElementById("qPhone").value.trim() || "—"}
+💬 Комментарий: ${document.getElementById("qComment").value.trim() || "—"}`;
+
+window.location.href = "https://api.whatsapp.com/send?phone=77019085358&text=" + encodeURIComponent(msg);
 });
 
 loadDataFromSheet();

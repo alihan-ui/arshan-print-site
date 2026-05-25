@@ -586,12 +586,17 @@ function loadDataFromSheet() {
 
 function sendLeadToWhatsApp(formData) {
   const msg =
-    "Здравствуйте! Хочу оставить заявку в ARSHAN PRINT.\\n\\n" +
-    "Имя: " + (formData.name || "—") + "\\n" +
-    "Телефон: " + (formData.phone || "—") + "\\n" +
-    "Услуга: " + (formData.service || "—") + "\\n" +
-    "Комментарий: " + (formData.comment || "—") + "\\n\\n" +
-    (formData.fileName ? "Файл выбран на сайте: " + formData.fileName + "\\nСейчас прикреплю его отдельным сообщением." : "Файл не выбран.");
+`Здравствуйте! Хочу оставить заявку в ARSHAN PRINT.
+
+👤 Имя: ${formData.name || "—"}
+📞 Телефон: ${formData.phone || "—"}
+🛠 Услуга: ${formData.service || "—"}
+💬 Комментарий: ${formData.comment || "—"}
+
+${formData.fileName 
+? `📎 Файл выбран: ${formData.fileName}
+Сейчас прикреплю его отдельным сообщением.` 
+: "📎 Файл не выбран."}`;
 
   window.location.href = "https://api.whatsapp.com/send?phone=77019085358&text=" + encodeURIComponent(msg);
 }

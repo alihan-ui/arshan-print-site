@@ -6,116 +6,175 @@
 <title>ARSHAN PRINT — Полиграфия в Астане</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--red:#e31e24;--red-dark:#b9151a;--black:#111;--muted:#606060;--line:#e7e7e7}
+:root{--red:#e31e24;--black:#111;--muted:#606060;--line:#e7e7e7}
 html{scroll-behavior:smooth}
 body{font-family:'Manrope',sans-serif;background:#fff;color:var(--black);overflow-x:hidden}
 a{color:inherit}
 
 .header{
-  position:fixed;top:0;left:0;right:0;height:104px;background:#fff;
-  border-bottom:1px solid var(--line);z-index:1000;display:flex;align-items:center;
-  justify-content:space-between;padding:0 5%;box-shadow:0 4px 20px rgba(0,0,0,.04)
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:120px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 4.8%;
+  box-shadow:0 8px 26px rgba(0,0,0,.035)
 }
 
 .logo-wrap{text-decoration:none;display:flex;align-items:center;justify-content:center}
-.logo-box{width:170px;text-align:center;line-height:1}
+.logo-box{width:145px;text-align:center;line-height:1}
 
 .logo-mark{
-  width:92px;
-  height:70px;
-  margin:0 auto 2px;
-  position:relative;
-}
-
-.logo-mark::before{
-  content:"A";
-  position:absolute;
-  left:0;
-  top:-18px;
-  font-family:Arial Black, Manrope, sans-serif;
-  font-size:96px;
-  font-weight:900;
-  line-height:1;
-  color:#111;
-  transform:skew(-8deg);
-}
-
-.logo-mark::after{
-  content:"A";
-  position:absolute;
-  left:20px;
-  top:-18px;
-  font-family:Arial Black, Manrope, sans-serif;
-  font-size:96px;
-  font-weight:900;
-  line-height:1;
-  color:var(--red);
-  transform:skew(-8deg);
-}
-
-  .logo-mark{
-  width:96px;
-  height:62px;
-  margin:0 auto 3px;
+  width:72px;
+  height:48px;
+  margin:0 auto 4px;
   position:relative;
 }
 
 .logo-mark:before{
   content:"";
   position:absolute;
-  left:10px;
-  top:3px;
-  width:24px;
-  height:58px;
+  left:5px;
+  top:0;
+  width:56px;
+  height:48px;
   background:#111;
-  transform:skew(-24deg);
+  clip-path:polygon(37% 0,0 100%,15% 100%,43% 20%,86% 100%,100% 100%,55% 0);
 }
 
 .logo-mark:after{
   content:"";
   position:absolute;
-  right:6px;
-  top:5px;
-  width:52px;
+  left:18px;
+  top:0;
+  width:50px;
   height:48px;
-  border:11px solid var(--red);
-  border-left:none;
-  transform:skew(-18deg);
+  background:var(--red);
+  clip-path:polygon(37% 0,0 100%,15% 100%,43% 20%,86% 100%,100% 100%,55% 0);
 }
-  
-.logo-name{font-weight:900;font-size:21px;letter-spacing:1px;color:#111}
-.logo-name span{color:var(--red)}
-.logo-sub{font-size:11px;letter-spacing:4px;margin-top:2px;color:#111}
 
-.nav{display:flex;align-items:center;gap:28px}
-.nav a{text-decoration:none;text-transform:uppercase;font-size:13px;font-weight:800;letter-spacing:1.45px;white-space:nowrap}
+.logo-name{
+  font-weight:900;
+  font-size:20px;
+  letter-spacing:.2px;
+  color:#111;
+  white-space:nowrap;
+}
+
+.logo-name span{color:var(--red)}
+.logo-sub{
+  font-size:10px;
+  letter-spacing:5px;
+  margin-top:4px;
+  color:#111;
+  font-weight:700;
+}
+
+.nav{display:flex;align-items:center;gap:36px}
+.nav a{text-decoration:none;text-transform:uppercase;font-size:13px;font-weight:900;letter-spacing:1.7px;white-space:nowrap}
 .nav a:hover{color:var(--red)}
-.header-btn{background:var(--red);color:#fff;border-radius:4px;padding:14px 28px;text-decoration:none;text-transform:uppercase;font-size:13px;font-weight:800;letter-spacing:1.7px}
+.header-btn{
+  background:var(--red);
+  color:#fff;
+  border-radius:4px;
+  padding:18px 38px;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:1.9px;
+  box-shadow:0 10px 22px rgba(227,30,36,.18)
+}
+
 .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer}
 .burger span{width:28px;height:2px;background:#111;display:block}
 
 .hero{
-  min-height:100vh;padding:160px 5% 80px;display:grid;grid-template-columns:minmax(0,720px) 1fr;
-  align-items:center;gap:40px;overflow:hidden;background:linear-gradient(90deg,#fff 0%,#fff 62%,#f7f7f7 100%)
+  min-height:100vh;
+  padding:185px 4.8% 55px;
+  display:grid;
+  grid-template-columns:minmax(0,620px) 1fr;
+  align-items:center;
+  gap:40px;
+  overflow:hidden;
+  background:linear-gradient(90deg,#fff 0%,#fff 64%,#f8f8f8 100%)
 }
-.hero-tag{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(227,30,36,.25);background:rgba(227,30,36,.06);color:var(--red);padding:9px 18px;border-radius:4px;text-transform:uppercase;font-size:12px;font-weight:800;letter-spacing:3px;margin-bottom:28px}
+
+.hero-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  border:1px solid rgba(227,30,36,.25);
+  background:rgba(227,30,36,.045);
+  color:var(--red);
+  padding:10px 18px;
+  border-radius:4px;
+  text-transform:uppercase;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:3px;
+  margin-bottom:34px
+}
 .hero-tag:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red)}
-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,8vw,138px);line-height:.92;letter-spacing:2px}
+
+h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(72px,7.4vw,122px);
+  line-height:.92;
+  letter-spacing:2px;
+  font-weight:400;
+}
 .accent{color:var(--red)}
-.hero-sub{margin-top:28px;max-width:590px;font-size:20px;line-height:1.65;color:var(--muted)}
-.hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:44px}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:58px;padding:0 38px;border-radius:4px;text-decoration:none;text-transform:uppercase;font-size:14px;font-weight:800;letter-spacing:2px;transition:.25s}
+.hero-sub{
+  margin-top:24px;
+  max-width:520px;
+  font-size:17px;
+  line-height:1.65;
+  color:var(--muted)
+}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:54px;
+  padding:0 34px;
+  border-radius:4px;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:2px;
+  transition:.25s
+}
 .btn-red{background:var(--red);color:#fff}
 .btn-outline{background:#fff;color:#111;border:1px solid var(--line)}
-.hero-stats{display:flex;gap:46px;flex-wrap:wrap;margin-top:62px}
-.stat-num{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;color:var(--red)}
-.stat-label{margin-top:8px;color:#777;text-transform:uppercase;font-size:12px;font-weight:700;letter-spacing:1.5px}
-.hero-visual{position:relative;min-height:480px;display:flex;align-items:center;justify-content:center}
-.watermark{opacity:.045;transform:scale(3.4)}
+
+.hero-stats{display:none}
+
+.hero-visual{
+  position:relative;
+  min-height:500px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.watermark{
+  opacity:.055;
+  transform:scale(4.4);
+  pointer-events:none;
+}
 
 section{padding:96px 5%}
 .section-kicker{color:var(--red);text-transform:uppercase;font-size:12px;font-weight:800;letter-spacing:3px;margin-bottom:14px}
@@ -180,40 +239,34 @@ section{padding:96px 5%}
 .input-group textarea{min-height:105px;resize:vertical}
 .submit{width:100%;border:0;background:var(--red);color:#fff;border-radius:7px;padding:16px;text-transform:uppercase;font-weight:800;letter-spacing:1.6px;cursor:pointer}
 
-.socials{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
-.social{width:54px;height:54px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.08);border-radius:10px;display:flex;align-items:center;justify-content:center;text-decoration:none}
-.social svg{width:28px;height:28px}
 .footer{background:#050505;color:#aaa;padding:28px 5%;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .wa-fixed{position:fixed;right:30px;bottom:30px;z-index:1001;width:64px;height:64px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 18px 45px rgba(37,211,102,.35);text-decoration:none}
 
 @media(max-width:1180px){
-  .nav{gap:18px}
-  .logo-box{width:150px}
-  .logo-name{font-size:18px}
+  .nav{gap:20px}
   .service-grid,.works-grid,.why-grid{grid-template-columns:repeat(2,1fr)}
   .hero{grid-template-columns:1fr}
   .hero-visual{display:none}
 }
 
 @media(max-width:760px){
-  .header{height:82px;padding:0 18px}
-  .logo-box{width:120px;text-align:center}
-  .logo-mark{width:58px;height:40px;margin:0 auto 3px}
+  .header{height:86px;padding:0 18px}
+  .logo-box{width:116px;text-align:center}
+  .logo-mark{width:54px;height:36px;margin:0 auto 3px}
+  .logo-mark:before{width:42px;height:36px;left:4px}
+  .logo-mark:after{width:38px;height:36px;left:14px}
   .logo-name{font-size:14px}
-  .logo-sub{font-size:8px;letter-spacing:2px}
+  .logo-sub{font-size:7px;letter-spacing:3px}
   .header-btn{display:none}
   .burger{display:flex}
   .nav{display:none}
-  .nav.open{display:flex;position:fixed;top:82px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 12px 30px rgba(0,0,0,.07);flex-direction:column;padding:22px 18px;gap:18px;align-items:flex-start}
-  .hero{min-height:auto;padding:112px 18px 56px;background:#fff;display:block}
+  .nav.open{display:flex;position:fixed;top:86px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 12px 30px rgba(0,0,0,.07);flex-direction:column;padding:22px 18px;gap:18px;align-items:flex-start}
+  .hero{min-height:auto;padding:118px 18px 56px;background:#fff;display:block}
   .hero-tag{font-size:10px;letter-spacing:2px;padding:8px 12px;margin-bottom:20px}
   h1{font-size:clamp(54px,16vw,82px);letter-spacing:1px}
   .hero-sub{font-size:16px;line-height:1.6;margin-top:22px}
   .hero-actions{flex-direction:column;margin-top:30px;gap:12px}
   .btn{width:100%;min-height:54px;padding:0 18px;font-size:13px}
-  .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
-  .stat-num{font-size:38px}
-  .stat-label{font-size:9px;letter-spacing:.8px;line-height:1.25}
   section{padding:62px 18px}
   .section-title{font-size:clamp(42px,13vw,62px)}
   .section-desc{margin-bottom:34px;font-size:15px}
@@ -225,12 +278,6 @@ section{padding:96px 5%}
   .work-filter{white-space:nowrap;flex:0 0 auto}
   .lead-info,.lead-form,.quick-form{padding:24px}
   .wa-fixed{right:18px;bottom:18px;width:56px;height:56px}
-}
-
-@media(max-width:420px){
-  .hero-stats{grid-template-columns:1fr;gap:18px}
-  .stat-num{font-size:44px}
-  .stat-label{font-size:11px}
 }
 </style>
 </head>
@@ -261,16 +308,11 @@ section{padding:96px 5%}
 <section class="hero" id="hero">
   <div class="hero-content">
     <div class="hero-tag">Профессиональная полиграфия</div>
-    <h1>МЫ ПЕЧАТАЕМ<br><span class="accent">ВАШУ</span><br>ИДЕЮ</h1>
-    <p class="hero-sub">ARSHAN PRINT — полиграфия и рекламная продукция высокого качества. Быстро, точно, с душой.</p>
+    <h1>МЫ<br>ПЕЧАТАЕМ<br><span class="accent">ВАШУ</span><br>ИДЕЮ</h1>
+    <p class="hero-sub">ARSHAN PRINT — полиграфия и рекламная продукция в Астане. Качество. Скорость. Надёжность.</p>
     <div class="hero-actions">
       <a class="btn btn-red" href="#lead">Оставить заявку</a>
       <a class="btn btn-outline" target="_blank" href="https://api.whatsapp.com/send?phone=77019085358">WhatsApp</a>
-    </div>
-    <div class="hero-stats">
-      <div><div class="stat-num">141</div><div class="stat-label">Публикация работ</div></div>
-      <div><div class="stat-num">275</div><div class="stat-label">Подписчиков</div></div>
-      <div><div class="stat-num">24ч</div><div class="stat-label">Быстрые заказы</div></div>
     </div>
   </div>
 

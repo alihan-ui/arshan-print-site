@@ -603,22 +603,26 @@ section{padding:96px 5%}
 </a>
 
 <script>
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJ56WP535-yJdDyxbV-1dqybd0RO-VTbY8CXad1SSGGC1a1-3vSbeElyxFDITSqnQn/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxOuSrkNL6yjF-0FAyyApHy1byt3TGz3n-kRiBymtCdOOT3uE-X6Mny5zqCaU51Koaj/exec";
 
 let works = [];
 let activeWorkCategory = "all";
 
 const nav = document.getElementById("nav");
-document.getElementById("burger").addEventListener("click", () => nav.classList.toggle("open"));
-nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
+const burger = document.getElementById("burger");
+
+if (burger && nav) {
+  burger.addEventListener("click", () => nav.classList.toggle("open"));
+  nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
+}
 
 function escapeHTML(v) {
   return String(v ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 function iconFor(cat) {
@@ -639,7 +643,7 @@ function formatServicePrice(price, unit) {
 
   if (!p || p === "0") return "по расчёту";
 
-  const n = Number(p.replace(/\s/g,"").replace(",","."));
+  const n = Number(p.replace(/\s/g, "").replace(",", "."));
 
   if (Number.isFinite(n)) {
     const f = n.toLocaleString("ru-RU");
@@ -650,11 +654,12 @@ function formatServicePrice(price, unit) {
 }
 
 function isActive(row) {
-  return ["да","yes","true","1","active","активен"].includes(String(row.active || "").trim().toLowerCase());
+  return ["да", "yes", "true", "1", "active", "активен"].includes(String(row.active || "").trim().toLowerCase());
 }
 
 function renderServices(data) {
-  if (!Array.isArray(data)) return;
+  const grid = document.getElementById("servicesGrid");
+  if (!grid || !Array.isArray(data)) return;
 
   const services = data.map((row, index) => {
     const name = String(row.name || "").trim();
@@ -670,13 +675,13 @@ function renderServices(data) {
       priceText: formatServicePrice(row.price, row.unit),
       sort: Number(row.sort || index + 1)
     };
-  }).filter(Boolean).sort((a,b)=>(a.sort||0)-(b.sort||0));
+  }).filter(Boolean).sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
   if (!services.length) return;
 
-  document.getElementById("servicesGrid").innerHTML = services.map((item, i) => `
+  grid.innerHTML = services.map((item, i) => `
     <div class="service-card">
-      <div class="service-num">${String(i + 1).padStart(2,"0")}</div>
+      <div class="service-num">${String(i + 1).padStart(2, "0")}</div>
       ${item.image ? `<img class="service-image" src="${escapeHTML(item.image)}" alt="${escapeHTML(item.name)}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">` : ""}
       <div class="service-icon ${item.image ? "has-image" : ""}">${item.icon}</div>
       <div class="service-name">${escapeHTML(item.name)}</div>
@@ -688,6 +693,8 @@ function renderServices(data) {
 
 function renderWorkFilters() {
   const box = document.getElementById("workFilters");
+  if (!box) return;
+
   const cats = [...new Set(works.map(w => w.category).filter(Boolean))];
 
   box.innerHTML = `<button class="work-filter active" data-category="all">Все</button>` +
@@ -705,6 +712,8 @@ function renderWorkFilters() {
 
 function renderWorks() {
   const grid = document.getElementById("worksGrid");
+  if (!grid) return;
+
   const list = activeWorkCategory === "all" ? works : works.filter(w => w.category === activeWorkCategory);
 
   if (!list.length) {
@@ -740,7 +749,7 @@ function renderWorksFromSheet(data) {
       description: String(row.description || "").trim(),
       sort: Number(row.sort || index + 1)
     };
-  }).filter(Boolean).sort((a,b)=>(a.sort||0)-(b.sort||0));
+  }).filter(Boolean).sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
   renderWorkFilters();
   renderWorks();
@@ -767,19 +776,44 @@ function loadDataFromSheet() {
   document.body.appendChild(w);
 }
 
-const leadPayload = JSON.stringify({
-  name: formData.name || "",
-  phone: formData.phone || "",
-  service: formData.service || "",
-  comment: formData.comment || "",
-  fileName: formData.fileName || ""
-});
+function sendLeadToAppsScript(formData) {
+  const leadPayload = JSON.stringify({
+    name: formData.name || "",
+    phone: formData.phone || "",
+    service: formData.service || "",
+    comment: formData.comment || "",
+    fileName: formData.fileName || ""
+  });
 
-navigator.sendBeacon(
-  APPS_SCRIPT_URL,
-  new Blob([leadPayload], { type: "text/plain" })
-);
-  
+  const frameName = "hiddenLeadFrame_" + Date.now();
+
+  const iframe = document.createElement("iframe");
+  iframe.name = frameName;
+  iframe.style.display = "none";
+  document.body.appendChild(iframe);
+
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = APPS_SCRIPT_URL;
+  form.target = frameName;
+  form.style.display = "none";
+
+  const input = document.createElement("input");
+  input.type = "hidden";
+  input.name = "payload";
+  input.value = leadPayload;
+
+  form.appendChild(input);
+  document.body.appendChild(form);
+  form.submit();
+
+  setTimeout(() => {
+    form.remove();
+    iframe.remove();
+  }, 5000);
+}
+
+function openWhatsApp(formData) {
   const msg =
 `Здравствуйте! Хочу оставить заявку в ARSHAN PRINT.
 
@@ -788,27 +822,57 @@ navigator.sendBeacon(
 🛠 Услуга: ${formData.service || "—"}
 💬 Комментарий: ${formData.comment || "—"}
 
-${formData.fileName 
+${formData.fileName
 ? `📎 Файл выбран: ${formData.fileName}
-Сейчас прикреплю его отдельным сообщением.` 
+Сейчас прикреплю его отдельным сообщением.`
 : "📎 Файл не выбран."}`;
 
-  window.location.href = "https://api.whatsapp.com/send?phone=77019085358&text=" + encodeURIComponent(msg);
+  window.location.href =
+    "https://api.whatsapp.com/send?phone=77019085358&text=" +
+    encodeURIComponent(msg);
 }
 
-document.getElementById("leadForm").addEventListener("submit", e => {
-  e.preventDefault();
+function sendLeadToWhatsApp(formData) {
+  sendLeadToAppsScript(formData);
 
-  const f = document.getElementById("leadFile");
+  setTimeout(() => {
+    openWhatsApp(formData);
+  }, 1200);
+}
 
-  sendLeadToWhatsApp({
-    name: document.getElementById("leadName").value.trim(),
-    phone: document.getElementById("leadPhone").value.trim(),
-    service: document.getElementById("leadService").value.trim(),
-    comment: document.getElementById("leadComment").value.trim(),
-    fileName: f && f.files && f.files[0] ? f.files[0].name : ""
+const leadForm = document.getElementById("leadForm");
+if (leadForm) {
+  leadForm.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const f = document.getElementById("leadFile");
+
+    sendLeadToWhatsApp({
+      name: document.getElementById("leadName").value.trim(),
+      phone: document.getElementById("leadPhone").value.trim(),
+      service: document.getElementById("leadService").value.trim(),
+      comment: document.getElementById("leadComment").value.trim(),
+      fileName: f && f.files && f.files[0] ? f.files[0].name : ""
+    });
   });
-});
+}
+
+const quickForm = document.getElementById("quickForm");
+if (quickForm) {
+  quickForm.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const formData = {
+      name: document.getElementById("qName").value.trim(),
+      phone: document.getElementById("qPhone").value.trim(),
+      service: "Быстрая заявка",
+      comment: document.getElementById("qComment").value.trim(),
+      fileName: ""
+    };
+
+    sendLeadToWhatsApp(formData);
+  });
+}
 
 loadDataFromSheet();
 </script>

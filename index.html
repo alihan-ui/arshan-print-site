@@ -603,7 +603,7 @@ section{padding:96px 5%}
 </a>
 
 <script>
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJshOoqnoC_zkd7FIBJhasrdGb40BYmIy9UO_wuUh1PMsA-FFv-Oi8nD--xTuKbVU7/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwEeatGxLJ8s04wlhIHc9MHDaHWkrMVRuer5smStnlbvSF5ccmc6qE9chta2eCPsQgr/exec";
 
 let works = [];
 let activeWorkCategory = "all";
@@ -767,8 +767,7 @@ function loadDataFromSheet() {
   document.body.appendChild(w);
 }
 
-function sendLeadToWhatsApp(formData) {
-  fetch(APPS_SCRIPT_URL, {
+await fetch(APPS_SCRIPT_URL, {
   method: "POST",
   mode: "no-cors",
   headers: {

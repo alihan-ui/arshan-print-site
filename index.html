@@ -768,6 +768,21 @@ function loadDataFromSheet() {
 }
 
 function sendLeadToWhatsApp(formData) {
+  fetch(APPS_SCRIPT_URL, {
+  method: "POST",
+  mode: "no-cors",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    name: formData.name || "",
+    phone: formData.phone || "",
+    service: formData.service || "",
+    comment: formData.comment || "",
+    file: formData.fileName || ""
+  })
+});
+  
   const msg =
 `Здравствуйте! Хочу оставить заявку в ARSHAN PRINT.
 

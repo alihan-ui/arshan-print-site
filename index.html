@@ -767,20 +767,18 @@ function loadDataFromSheet() {
   document.body.appendChild(w);
 }
 
-await fetch(APPS_SCRIPT_URL, {
-  method: "POST",
-  mode: "no-cors",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    name: formData.name || "",
-    phone: formData.phone || "",
-    service: formData.service || "",
-    comment: formData.comment || "",
-    file: formData.fileName || ""
-  })
+const leadPayload = JSON.stringify({
+  name: formData.name || "",
+  phone: formData.phone || "",
+  service: formData.service || "",
+  comment: formData.comment || "",
+  fileName: formData.fileName || ""
 });
+
+navigator.sendBeacon(
+  APPS_SCRIPT_URL,
+  new Blob([leadPayload], { type: "text/plain" })
+);
   
   const msg =
 `Здравствуйте! Хочу оставить заявку в ARSHAN PRINT.
